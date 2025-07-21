@@ -12,6 +12,12 @@ export default function Input({
   outline = false,
   className = '',
   type = 'text',
+  label = '',
+  id = '',
+  required = false,
+  helperText = '',
+  error = false,
+  errorMessage = '',
 }) {
   const sizeClasses = {
     sm: 'px-3 py-1.5 text-sm',
@@ -35,30 +41,71 @@ export default function Input({
   };
 
   const base =
-    'transition-all duration-150 focus:outline-none focus:ring-2';
+    'w-full transition-all duration-150 focus:outline-none focus:ring-2';
 
-  // disabled 상태에서 오버라이드
   const disabledClasses =
     'disabled:bg-gray-200 disabled:text-gray-500 disabled:cursor-not-allowed disabled:border-gray-200';
 
-  // 최종 클래스 이름 합성
+  // 에러 상태일 때 색상 오버라이드
+  const errorClasses = error 
+    ? 'border-red-500 text-red-600 focus:ring-red-500 bg-red-50' 
+    : '';
+
   const finalClassName = twMerge(
     base,
     sizeClasses[size],
-    colorClasses[color],
+    !error && colorClasses[color], // 에러가 아닐 때만 기본 색상 적용
+    error && errorClasses, // 에러일 때 에러 색상 적용
     rounded && 'rounded-full',
     disabledClasses,
     className
   );
 
+  const labelSizeClasses = {
+    sm: 'text-sm',
+    md: 'text-sm',
+    lg: 'text-base',
+  };
+
+  // 고유 ID 생성
+  const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
+
   return (
-    <input
-      type={type}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      disabled={disabled}
-      className={finalClassName}
-    />
+    <div className="w-full">
+      {label && (
+        <label 
+          htmlFor={inputId}
+          className={twMerge(
+            'block font-medium text-gray-700 mb-1',
+            labelSizeClasses[size],
+            disabled && 'text-gray-400',
+            error && 'text-red-600'
+          )}
+        >
+          {label}
+          {required && <span className="text-red-500 ml-1">*</span>}
+        </label>
+      )}
+      
+      <input
+        id={inputId}
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        disabled={disabled}
+        required={required}
+        className={finalClassName}
+      />
+
+      {(helperText || (error && errorMessage)) && (
+        <p className={twMerge(
+          'mt-1 text-xs',
+          error ? 'text-red-600' : 'text-gray-500'
+        )}>
+          {error && errorMessage ? errorMessage : helperText}
+        </p>
+      )}
+    </div>
   );
 }
