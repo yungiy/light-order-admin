@@ -1,11 +1,9 @@
 import React from 'react';
 
-const Reservations = () => {
+export default function Reservations() {
   return (
     <div>
-      <h1 className="text-2xl font-bold">Reservations</h1>
+      <h1 className='text-2xl font-bold'>Reservations</h1>
     </div>
   );
-};
-
-export default Reservations;
+}
