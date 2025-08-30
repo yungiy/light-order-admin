@@ -1,10 +1,59 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './style/tailwind.css'
-import App from './App.jsx'
+// import library
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+
+// import files
+import './style/tailwind.css';
+import App from './App.jsx';
+import Dashboard from './pages/Dashboard';
+import Orders from './pages/Orders';
+import Menus from './pages/Menus';
+import Customers from './pages/Customers';
+import Reservations from './pages/Reservations';
+import Notifications from './pages/Notifications';
+import Statistics from './pages/Statistics';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        path: 'dashboard',
+        element: <Dashboard />,
+      },
+      {
+        path: 'orders',
+        element: <Orders />,
+      },
+      {
+        path: 'menus',
+        element: <Menus />,
+      },
+      {
+        path: 'customers',
+        element: <Customers />,
+      },
+      {
+        path: 'reservations',
+        element: <Reservations />,
+      },
+      {
+        path: 'notifications',
+        element: <Notifications />,
+      },
+      {
+        path: 'statistics',
+        element: <Statistics />,
+      },
+    ],
+  },
+]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <RouterProvider router={router} />
+  </StrictMode>
+);

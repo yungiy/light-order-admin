@@ -1,27 +1,29 @@
 import { useState } from 'react';
-import Input from './components/share/Input';
+import { Outlet } from 'react-router-dom';
+import Header from './components/layout/Header';
+import SideBar from './components/layout/SideBar';
 
 export default function App() {
-  const [password, setPassword] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   return (
-    <>
-      <div>
-        테스트
-        <Input
-          label='비밀번호'
-          value={password}
-          onChange={handlePasswordChange}
-          type='password'
-          required
-          helperText='8자 이상 입력하세요'
-          size='sm'
-        />
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar */}
+      <div className={`fixed inset-y-0 left-0 z-30 w-64 bg-gray-800 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out md:relative md:translate-x-0`}>
+        <SideBar toggleSidebar={toggleSidebar} />
       </div>
-    </>
+
+      {/* Main content */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <Header toggleSidebar={toggleSidebar} />
+        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4">
+          <Outlet />
+        </main>
+      </div>
+    </div>
   );
 }

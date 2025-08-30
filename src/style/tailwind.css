@@ -1,1 +1,36 @@
 @import "tailwindcss";
+
+@theme {
+  /*
+   * ========================================================================
+   * Custom Colors
+   * ========================================================================
+   *
+   * Define your custom color palette here. These will generate utility
+   * classes like `bg-primary`, `text-secondary`, etc.
+   */
+   
+  --color-primary: #aab9ff;
+  --color-secondary: #f9a8d4;
+
+  /*
+   * ========================================================================
+   * Custom Fonts
+   * ========================================================================
+   *
+   * Define your custom font families. You can then use these with
+   * utility classes like `font-sans`, `font-display`, etc.
+   */
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Satoshi", "sans-serif";
+
+  /*
+   * ========================================================================
+   * Custom Breakpoints
+   * ========================================================================
+   *
+   * Define your custom breakpoints for responsive design. These will
+   * generate screen utilities like `3xl:text-center`, etc.
+   */
+  --breakpoint-3xl: 120rem;
+}
