@@ -10,7 +10,6 @@ import App from './App.jsx';
 import Dashboard from './pages/Dashboard';
 import Orders from './pages/Orders';
 import Menus from './pages/Menus';
-import Customers from './pages/Customers';
 import Reservations from './pages/Reservations';
 import Notifications from './pages/Notifications';
 import Statistics from './pages/Statistics';
@@ -31,10 +30,6 @@ const router = createBrowserRouter([
       {
         path: 'menus',
         element: <Menus />,
-      },
-      {
-        path: 'customers',
-        element: <Customers />,
       },
       {
         path: 'reservations',
