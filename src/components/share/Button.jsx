@@ -2,53 +2,46 @@ import { twMerge } from 'tailwind-merge';
 
 export default function Button({
   children,
-  size = 'md', // sm md lg
-  color = 'primary', // colorClasses 참고
-  rounded = false,
-  outline = false,
-  disabled = false,
-  customColor = '',
-  onClick,
-  className = '',
+  size = 'md',
+  color = 'primary',
+  variant = 'solid',
+  className,
+  ...rest
 }) {
-  const sizeClasses = {
-    sm: 'px-3 py-1.5 text-sm',
-    md: 'px-4 py-2.5 text-base',
-    lg: 'px-5 py-3 text-lg',
+  const baseStyles =
+    'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none';
+
+  const sizeStyles = {
+    sm: 'w-24 h-10 text-sm',
+    md: 'w-32 h-12 text-base',
+    lg: 'w-40 h-16 text-lg',
   };
 
-  const colorClasses = {
-    primary: outline
-      ? 'border border-blue-500 text-blue-500 hover:bg-blue-50'
-      : 'bg-blue-500 text-white hover:bg-blue-600',
-    secondary: outline
-      ? 'border border-gray-500 text-gray-700 hover:bg-gray-100'
-      : 'bg-gray-500 text-white hover:bg-gray-600',
-    danger: outline
-      ? 'border border-red-500 text-red-500 hover:bg-red-50'
-      : 'bg-red-500 text-white hover:bg-red-600',
-    custom: outline
-      ? `border ${customColor} text-${customColor.replace('bg-', '')}`
-      : `${customColor} text-white`,
+  const colorStyles = {
+    primary: {
+      solid: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
+      outline:
+        'border border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-blue-500',
+    },
+    secondary: {
+      solid: 'bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500',
+      outline:
+        'border border-gray-600 text-gray-600 hover:bg-gray-50 focus:ring-gray-500',
+    },
+    disable: 'bg-gray-100 text-gray-600 border border-gray-600',
   };
 
-  const base =
-    'inline-flex items-center justify-center transition-all duration-150 font-medium focus:outline-none';
-
-  const disabledClasses =
-    'disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:border-none';
-
-  const finalClassName = twMerge(
-    base,
-    sizeClasses[size],
-    colorClasses[color],
-    rounded && 'rounded-full',
-    disabledClasses,
+  const classes = twMerge(
+    baseStyles,
+    sizeStyles[size],
+    color === 'disable'
+    ? colorStyles.disable
+    : colorStyles[color][variant],
     className
   );
 
   return (
-    <button disabled={disabled} onClick={onClick} className={finalClassName}>
+    <button className={classes} {...rest}>
       {children}
     </button>
   );
