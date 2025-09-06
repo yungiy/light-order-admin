@@ -1,5 +1,5 @@
 import { SIDEBAR_PATH } from '../../constants';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 export default function SideBar({ toggleSidebar }) {
   return (

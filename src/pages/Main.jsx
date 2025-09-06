@@ -12,7 +12,7 @@ export default function Main() {
 
   return (
     <div className='flex h-screen bg-gray-100'>
-      {/* Sidebar */}
+      {/* 사이드 바 */}
       <div
         className={`fixed inset-y-0 left-0 z-30 w-52 bg-gray-800 transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -21,11 +21,11 @@ export default function Main() {
         <SideBar toggleSidebar={toggleSidebar} />
       </div>
 
-      {/* Main content */}
+      {/* 메인 콘텐츠 */}
       <div className='flex-1 flex flex-col overflow-hidden'>
         <Header toggleSidebar={toggleSidebar} />
-        <main className='flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4'>
-          <Outlet />
+        <main className='bg-gray-100'>
+          <Outlet/>
         </main>
       </div>
     </div>
