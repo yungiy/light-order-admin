@@ -3,7 +3,6 @@ export const SIDEBAR_PATH = [
   { path: '/orders', label: '주문관리' },
   { path: '/menus', label: '메뉴관리' },
   { path: '/reservations', label: '예약관리' },
-  { path: '/notifications', label: '알림관리' },
   { path: '/statistics', label: '매출통계' },
 ];
 
